@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Photo Gallery</title>
+    <%- include('./partials/head')  %>
+  </head>
+  <body>
+    <header>
+        <%- include('./partials/nav')  %>
+    </header>
+    <main class="container">
+      <h1></h1>
+    </main>
+    <div class="images-count">
+        <% if (images.length == 0) { %>
+            <p>Todavía no hay imágenes en la fototeca. <a href="/add-image-form">Añade una ahora. </a></p> 
+            <% } else { %>
+             <p>La fototeca tiene actualmente <%= images.length %> imágenes </p>
+             <% } %>   
+    </div>
+        <div class="gallery">
+            <% for (const image of images) { %>
+                <div class="image-frame">
+                    <form class="delete-btn" action="/images/<%=image.id %>/delete" method="post" onsubmit="confirmDelete(event, '<%= image.title %>')">
+                        <input class="delete-btn" type="submit" value="X">
+                    </form>
+                      <div>
+                        <img src="<%= image.url %>" alt="<%= image.title %>">
+                      </div>
+                </div>
+
+            <% } %>
+        </div>
+    </article>
+    <script>
+        function confirmDelete(event, title) {
+            const mustDelete = confirm(`Are you sure you want to delete the image ${title}?`);
+        }
+        if(!mustDelete) {
+            event.preventDefault();
+        }
+    </script>
+  </body>
+</html>

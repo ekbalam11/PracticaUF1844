@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add new image</title>
+    <script defer src= "form.js"></script>
+    <%- include('./partials/head')  %>
+</head>
+<body>
+    <header>
+        <%- include('./partials/nav')  %>
+    </header>
+    <div class="form-container">
+        <form action="/add-image-form" method="POST">
+            <label for="title">Name your image</label>
+            <input type="text" name="title" id="title">
+            <label for="url">Put your image URL here</label>
+            <input type="url" name="url" id="url">
+            <input type="submit" value="add image">
+          </form>
+    </div>
+    <% if ( isImagePosted )  { %>
+        <div id= "message" class="container-alert-success"> 
+            <p>The image has been posted correctly!</p>
+        </div>
+    <% } %>
+</body>
+</html>

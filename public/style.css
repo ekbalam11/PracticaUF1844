@@ -1,0 +1,110 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    padding: 1rem;
+}
+
+nav{
+    display: flex;
+    gap: 20px;
+}
+.nav-title a{
+    color: aliceblue;
+    font-size: 1.5rem;
+    text-decoration-line: none;
+}
+.nav-btn{
+    display: flex;
+    gap: 30px;
+}
+.nav-btn a{
+    text-decoration: none;
+    position: relative;
+}
+.nav-btn a::after{
+    content: '';
+    width: 0;
+    height: 3px;
+    background: #83cbff;
+    position: absolute;
+    left: 0;
+    bottom: 25px;
+    transition: .75s;
+}
+.nav-btn a:hover::after{
+    width: 100%;
+}
+
+
+/* -------------------------gallery */
+
+/* .gallery{
+    display: flex;
+    gap: 16px;
+} */
+.gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px
+}
+
+.image-frame {
+    border: 10px solid rgb(150, 72, 72);
+}
+
+.gallery img {
+    aspect-ratio: 1/1;
+    width: 100%;
+    object-fit: cover; /*Escalate the image to fit the cover */
+    opacity: 0.5; 
+    cursor: pointer;
+}
+
+.gallery img:hover {
+    opacity: 1
+}
+
+.gallery form{
+    background-color: transparent;
+    border: 0px solid transparent;
+}
+
+.delete-btn{
+    background-color: brown;
+    color: black;
+    border-radius: 50px;
+    width: 20px;
+    height: 15px;
+}
+
+.container-alert-success{
+    text-align: center;
+    padding: 1rem;
+}
+
+/* ----------------form------------------ */
+
+.form-container{
+    margin: 0 10rem 0 10rem;
+}
+
+@media (min-width: 760px) {
+    .gallery {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .gallery__item img {
+        aspect-ratio: 1/1;
+        width: 100%;
+        object-fit: cover;
+        /* Escala y recorta la imagen para llenar el contenedor */
+    }
+
+
+}
