@@ -53,9 +53,6 @@ nav{
     gap: 16px
 }
 
-.image-frame {
-    border: 10px solid rgb(150, 72, 72);
-}
 
 .gallery img {
     aspect-ratio: 1/1;

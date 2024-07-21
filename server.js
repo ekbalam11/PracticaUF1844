@@ -15,19 +15,29 @@ app.use(express.static('public'));
 app.use(morgan('tiny'));
 
 let id = 4;
-let images = [{
-  id: 1,
-  title: "happy cat",
-  url: "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg"
-}, {
-  id: 2,
-  title: "happy dog",
-  url: "https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-}, {
-  id: 3,
-  title: "cat snow",
-  url: "https://images.pexels.com/photos/3923387/pexels-photo-3923387.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-}];
+let images = [
+  {
+      id: 1,
+      title: "happy cat",
+      url: "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg",
+      date: new Date(),
+      color: "" // Add color field
+  },
+  {
+      id: 2,
+      title: "happy dog",
+      url: "https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      date: new Date(),
+      color: ""
+  },
+  {
+      id: 3,
+      title: "cat snow",
+      url: "https://images.pexels.com/photos/3923387/pexels-photo-3923387.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      date: new Date(),
+      color: ""
+  }
+];
 
 //Render home.ejs when the client do a GET request
 app.get('/', (req, res)=>{
@@ -61,11 +71,20 @@ if (!title) {
 if (title.length > 30) {
   return res.status(400).send('The title must be maximum of 30 characters')
 }
-  images.push({
-    id: id++,
-    title,
-    url
-  });
+
+images.push({
+  id: id++,
+  title,
+  url,
+  date: new Date(), // Add the current date
+});
+
+// Route to handle image deletion
+app.post('/images/:id/delete', (req, res) => {
+  const imageId = parseInt(req.params.id);
+  images = images.filter(image => image.id !== imageId); 
+  res.redirect('/');
+});
 
   console.log("This is the actual DB: ", images);
   res.render('form', {
@@ -74,7 +93,7 @@ if (title.length > 30) {
 });
   //--------------------------------------------Setting up the server
     //Variable to indicate the port
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.PORT || 4000;
   app.listen(PORT, (req, res) => {
     console.log(`The server is listenting correctly in the port ${PORT} `);
   })

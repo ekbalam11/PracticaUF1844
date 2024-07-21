@@ -27,6 +27,11 @@
                       <div>
                         <img src="<%= image.url %>" alt="<%= image.title %>">
                       </div>
+                      <div class="image-details">
+                        <h3><%= image.title.toUpperCase() %></h3> 
+                        <p><%= image.date.toLocaleDateString() %></p> 
+                        <p><%= image.color %></p> 
+                    </div>
                 </div>
 
             <% } %>
