@@ -18,24 +18,25 @@
              <p>La fototeca tiene actualmente <%= images.length %> imágenes </p>
              <% } %>   
     </div>
-        <div class="gallery">
-            <% for (const image of images) { %>
-                <div class="image-frame">
-                    <form class="delete-btn" action="/images/<%=image.id %>/delete" method="post" onsubmit="confirmDelete(event, '<%= image.title %>')">
-                        <input class="delete-btn" type="submit" value="X">
-                    </form>
-                      <div>
-                        <img src="<%= image.url %>" alt="<%= image.title %>">
-                      </div>
-                      <div class="image-details">
-                        <h3><%= image.title.toUpperCase() %></h3> 
-                        <p><%= image.date.toLocaleDateString() %></p> 
-                        <p><%= image.color %></p> 
-                    </div>
+    <div class="gallery">
+        <% images.sort((a, b) => b.date - a.date); 
+    
+           for (const image of images) { %>
+            <div class="image-frame">
+                <form class="delete-btn" action="/images/<%= image.id %>/delete" method="post" onsubmit="confirmDelete(event, '<%= image.title %>')">
+                  <input class="delete-btn" type="submit" value="X">
+                </form>
+                <div>
+                    <img src="<%= image.url %>" alt="<%= image.title %>" class="image-with-border" data-color="<%= image.color %>"> 
                 </div>
-
-            <% } %>
-        </div>
+                <div class="image-details">
+                    <h3><%= image.title.toUpperCase() %></h3> 
+                    <p><%= image.date.toLocaleDateString() %></p> 
+                    <p><%= image.color %></p> 
+                </div>
+            </div>
+        <% } %>
+    </div>
     </article>
     <script>
         function confirmDelete(event, title) {
@@ -43,7 +44,15 @@
         }
         if(!mustDelete) {
             event.preventDefault();
-        }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const imagesWithBorders = document.querySelectorAll('.image-with-border');
+            imagesWithBorders.forEach(image => {
+            const color = image.dataset.color; 
+            image.style.border = `5px solid ${color}`;
+        });
+    });
     </script>
   </body>
 </html>

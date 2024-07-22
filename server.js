@@ -93,7 +93,7 @@ app.post('/images/:id/delete', (req, res) => {
 });
   //--------------------------------------------Setting up the server
     //Variable to indicate the port
-    const PORT = process.env.PORT || 4000;
+    const PORT = process.env.PORT || 3000;
   app.listen(PORT, (req, res) => {
     console.log(`The server is listenting correctly in the port ${PORT} `);
   })
